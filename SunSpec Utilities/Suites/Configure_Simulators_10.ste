@@ -1,0 +1,18 @@
+<suite name="Configure_Simulators_10">
+  <members>
+    <member name="Ametek_Grid_Sim_Setup.tst" />
+    <member name="Ametek_PV_Sim_Setup.tst" />
+  </members>
+  <params>
+    <param name="pvsim.channel" type="int">10</param>
+    <param name="gridsim.i_max" type="float">100.0</param>
+    <param name="gridsim.v_nom" type="float">277.2</param>
+    <param name="gridsim.v_max" type="float">300.0</param>
+    <param name="pvsim.vmp" type="float">460.0</param>
+    <param name="pvsim.pmp" type="float">3000.0</param>
+    <param name="pvsim.ipaddr" type="string">192.168.0.167</param>
+    <param name="gridsim.mode" type="string">Ametek</param>
+    <param name="pvsim.mode" type="string">TerraSAS</param>
+    <param name="gridsim.serial_port" type="string">com1</param>
+  </params>
+</suite>

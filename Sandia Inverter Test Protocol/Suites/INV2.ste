@@ -1,0 +1,23 @@
+<suite globals="True" name="INV2">
+  <members>
+    <member name="INV2/INV2_1.tst" />
+    <member name="INV2/INV2_2.tst" />
+    <member name="INV2/INV2_3.tst" />
+    <member name="INV2/INV2_4.tst" />
+    <member name="INV2/INV2_5.tst" />
+    <member name="INV2/INV2_6.tst" />
+  </members>
+  <params>
+    <param name="comm.slave_id" type="int">5</param>
+    <param name="pvsim.terrasas.channel" type="int">10</param>
+    <param name="pvsim.terrasas.vmp" type="float">460.0</param>
+    <param name="pvsim.terrasas.pmp" type="float">3000.0</param>
+    <param name="comm.baudrate" type="int">9600</param>
+    <param name="pvsim.terrasas.ipaddr" type="string">192.168.0.167</param>
+    <param name="comm.ifc_name" type="string">COM7</param>
+    <param name="das.mode" type="string">Manual</param>
+    <param name="comm.parity" type="string">N</param>
+    <param name="comm.ifc_type" type="string">RTU</param>
+    <param name="pvsim.mode" type="string">TerraSAS</param>
+  </params>
+</suite>

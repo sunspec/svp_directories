@@ -1,0 +1,20 @@
+<suite name="Volt_Var">
+  <members>
+    <member name="VoltVar/UL1741_Test_1 .tst" />
+    <member name="VoltVar/UL1741_Test_2.tst" />
+    <member name="VoltVar/UL1741_Test_3.tst" />
+    <member name="VoltVar/UL1741_Test_4.tst" />
+    <member name="VoltVar/UL1741_Test_5.tst" />
+  </members>
+  <params>
+    <param name="comm.slave_id" type="int">5</param>
+    <param name="comm.baudrate" type="int">9600</param>
+    <param name="comm.ifc_name" type="string">COM3</param>
+    <param name="datatrig.trigger_method" type="string">Disabled - Data from EUT</param>
+    <param name="datatrig.dsm_method" type="string">Disabled - Data from EUT</param>
+    <param name="gridsim.mode" type="string">Manual</param>
+    <param name="pvsim.mode" type="string">Manual</param>
+    <param name="comm.parity" type="string">N</param>
+    <param name="comm.ifc_type" type="string">RTU</param>
+  </params>
+</suite>

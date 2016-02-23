@@ -1,0 +1,32 @@
+<suite globals="True" name="VRT">
+  <members>
+    <member name="VRT/VRT1.tst" />
+    <member name="VRT/VRT2.tst" />
+  </members>
+  <params>
+    <param name="comm.slave_id" type="int">5</param>
+    <param name="gridsim.ametek.freq" type="float">60.0</param>
+    <param name="gridsim.ametek.i_max" type="float">100.0</param>
+    <param name="gridsim.ametek.v_nom" type="float">277.2</param>
+    <param name="gridsim.ametek.v_max" type="float">300.0</param>
+    <param name="comm.baudrate" type="int">9600</param>
+    <param name="wfm.trighyswindow" type="string">10.000e-3</param>
+    <param name="wfm.pretrig" type="string">166.667e-3</param>
+    <param name="wfm.trigsamplingrate" type="string">24.0e3</param>
+    <param name="wfm.trigval" type="string">3.000</param>
+    <param name="wfm.trigtimeout" type="string">30</param>
+    <param name="wfm.posttrig" type="string">5.000</param>
+    <param name="wfm.trigacqchannels" type="string">AC_Current_10, AC_Voltage_10, Ametek_Trigger</param>
+    <param name="gridsim.mode" type="string">Ametek</param>
+    <param name="wfm.trigchannel" type="string">Ametek_Trigger</param>
+    <param name="comm.ifc_name" type="string">COM7</param>
+    <param name="gridsim.auto_config" type="string">Disabled</param>
+    <param name="pvsim.mode" type="string">Manual</param>
+    <param name="comm.parity" type="string">N</param>
+    <param name="comm.ifc_type" type="string">RTU</param>
+    <param name="wfm.trigcondition" type="string">Rising Edge</param>
+    <param name="datatrig.dsm_method" type="string">Sandia LabView DSM</param>
+    <param name="gridsim.ametek.comm" type="string">Serial</param>
+    <param name="gridsim.ametek.serial_port" type="string">com1</param>
+  </params>
+</suite>

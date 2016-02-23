@@ -1,0 +1,19 @@
+<suite name="Fixed_Power_Factor">
+  <members>
+    <member name="Fixed PF/Test_1_PF_1.000.tst" />
+    <member name="Fixed PF/Test_2_PF_-0.850.tst" />
+    <member name="Fixed PF/Test_3_PF_-0.925.tst" />
+    <member name="Fixed PF/Test_4_PF_0.850.tst" />
+    <member name="Fixed PF/Test_5_PF_0.925.tst" />
+  </members>
+  <params>
+    <param name="comm.slave_id" type="int">5</param>
+    <param name="comm.baudrate" type="int">9600</param>
+    <param name="comm.ifc_name" type="string">COM3</param>
+    <param name="datatrig.trigger_method" type="string">Disabled - Data from EUT</param>
+    <param name="datatrig.dsm_method" type="string">Disabled - Data from EUT</param>
+    <param name="pvsim.mode" type="string">Manual</param>
+    <param name="comm.parity" type="string">N</param>
+    <param name="comm.ifc_type" type="string">RTU</param>
+  </params>
+</suite>

@@ -1,0 +1,29 @@
+<suite name="UL1741_SA">
+  <members>
+    <member name="Fixed_Power_Factor.ste" />
+    <member name="Volt_Var.ste" />
+  </members>
+  <params>
+    <param name="comm.slave_id" type="int">5</param>
+    <param name="datatrig.node" type="int">10</param>
+    <param name="pvsim.channel" type="int">10</param>
+    <param name="gridsim.i_max" type="float">100.0</param>
+    <param name="gridsim.v_nom" type="float">277.1</param>
+    <param name="gridsim.v_max" type="float">300.0</param>
+    <param name="pvsim.vmp" type="float">460.0</param>
+    <param name="pvsim.pmp" type="float">3000.0</param>
+    <param name="comm.baudrate" type="int">9600</param>
+    <param name="datatrig.das_comp" type="string">10 Node</param>
+    <param name="pvsim.ipaddr" type="string">192.168.0.167</param>
+    <param name="gridsim.mode" type="string">Ametek</param>
+    <param name="comm.ifc_name" type="string">COM7</param>
+    <param name="datatrig.trigger_method" type="string">Create Local File for Sandia LabView DSM</param>
+    <param name="gridsim.auto_config" type="string">Disabled</param>
+    <param name="comm.parity" type="string">N</param>
+    <param name="comm.ifc_type" type="string">RTU</param>
+    <param name="datatrig.dsm_method" type="string">Sandia LabView DSM</param>
+    <param name="pvsim.mode" type="string">TerraSAS</param>
+    <param name="gridsim.profile_name" type="string">VV Profile</param>
+    <param name="gridsim.serial_port" type="string">com1</param>
+  </params>
+</suite>

@@ -1,0 +1,21 @@
+<suite globals="True" name="FW21">
+  <members>
+    <member name="FW/FW21_1.tst" />
+    <member name="FW/FW21_2.tst" />
+    <member name="FW/FW21_3.tst" />
+    <member name="FW/FW21_4.tst" />
+    <member name="FW/FW21_5.tst" />
+    <member name="FW/FW21_6.tst" />
+  </members>
+  <params>
+    <param name="comm.slave_id" type="int">1</param>
+    <param name="comm.baudrate" type="int">9600</param>
+    <param name="comm.ifc_name" type="string">COM3</param>
+    <param name="gridsim.auto_config" type="string">Disabled</param>
+    <param name="gridsim.mode" type="string">Manual</param>
+    <param name="pvsim.mode" type="string">Manual</param>
+    <param name="das.mode" type="string">Manual</param>
+    <param name="comm.parity" type="string">N</param>
+    <param name="comm.ifc_type" type="string">RTU</param>
+  </params>
+</suite>

@@ -1,0 +1,15 @@
+<suite name="Normal RR">
+  <members>
+    <member name="Normal Ramp Rate/RR.tst" />
+  </members>
+  <params>
+    <param name="comm.slave_id" type="int">5</param>
+    <param name="comm.baudrate" type="int">9600</param>
+    <param name="comm.ifc_name" type="string">COM7</param>
+    <param name="datatrig.trigger_method" type="string">Disabled - Data from EUT</param>
+    <param name="datatrig.dsm_method" type="string">Disabled - Data from EUT</param>
+    <param name="pvsim.mode" type="string">Manual</param>
+    <param name="comm.parity" type="string">N</param>
+    <param name="comm.ifc_type" type="string">RTU</param>
+  </params>
+</suite>

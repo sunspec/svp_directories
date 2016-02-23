@@ -1,0 +1,28 @@
+<suite globals="True" name="Node_2">
+  <members>
+    <member name="INV1.ste" />
+    <member name="INV2.ste" />
+    <member name="INV3.ste" />
+    <member name="VV12.ste" />
+  </members>
+  <params>
+    <param name="pvsim.terrasas.channel" type="int">2</param>
+    <param name="gridsim.ametek.freq" type="float">60.0</param>
+    <param name="gridsim.ametek.i_max" type="float">100.0</param>
+    <param name="comm.slave_id" type="int">126</param>
+    <param name="gridsim.ametek.v_nom" type="float">277.2</param>
+    <param name="gridsim.ametek.v_max" type="float">300.0</param>
+    <param name="pvsim.terrasas.vmp" type="float">460.0</param>
+    <param name="comm.ipport" type="int">502</param>
+    <param name="pvsim.terrasas.pmp" type="float">3000.0</param>
+    <param name="pvsim.terrasas.ipaddr" type="string">192.168.0.167</param>
+    <param name="comm.ipaddr" type="string">192.168.0.172</param>
+    <param name="gridsim.mode" type="string">Ametek</param>
+    <param name="gridsim.auto_config" type="string">Disabled</param>
+    <param name="das.mode" type="string">Manual</param>
+    <param name="gridsim.ametek.comm" type="string">Serial</param>
+    <param name="comm.ifc_type" type="string">TCP</param>
+    <param name="pvsim.mode" type="string">TerraSAS</param>
+    <param name="gridsim.ametek.serial_port" type="string">com1</param>
+  </params>
+</suite>
