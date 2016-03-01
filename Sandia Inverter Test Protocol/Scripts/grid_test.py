@@ -55,7 +55,7 @@ def test_run():
     try:
         # initialize grid simulation
         gsim = gridsim.gridsim_init(ts)
-        grid.profile_load(ts.param_value('profile.profile_name'))
+        gsim.profile_load(ts.param_value('profile.profile_name'))
 
         gsim.profile_start()
 
@@ -106,6 +106,7 @@ info.param('profile.profile_name', label='Simulation profile', default='FW Profi
 #Grid simulator
 gridsim.params(info)
 
+info.logo('sandia.gif')
 info.logo('sunspec.gif')
 
 def script_info():

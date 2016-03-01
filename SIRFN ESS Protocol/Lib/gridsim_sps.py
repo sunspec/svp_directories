@@ -6,8 +6,7 @@ from collections import namedtuple
 import script
 
 sps_info = {
-	'name': os.path.splitext(os.path.basename(__file__))[0],
-#     'name':'wonderingwhenthisisused',
+    'name': os.path.splitext(os.path.basename(__file__))[0],
     'mode': 'SPS'
 }
 
@@ -159,7 +158,7 @@ class GridSim(gridsim.GridSim):
         f_nom = self.freq_param
         f = self.freq()
 
-        if self._numeric_equal(f, f_nom, self.eps):  # f != f_nom:
+        if not self._numeric_equal(f, f_nom, self.eps):  # f != f_nom:
             f = self.freq(f_nom)
         self.ts.log('Grid sim nominal frequency settings: %.2fHz' % f)
 
@@ -372,7 +371,7 @@ class GridSim(gridsim.GridSim):
         Start the loaded profile.
         """
         if self.profile is not None:
-            print('Starting profile: %s' % self.profile_name)
+            self.ts.log('Starting profile: %s' % self.profile_name)
             prev_v = self.voltage()[0]
             prev_f = self.freq()
 
@@ -380,30 +379,30 @@ class GridSim(gridsim.GridSim):
                 if not self._numeric_equal(prev_v, entry.v, self.eps):
                     if not self._numeric_equal(prev_f, entry.f, self.eps):
                         # change in voltage and frequency
-                        print('\tChange voltage from %0.1fV to %0.1fV and frequency from %0.1fHz to %0.1fHz in %0.2fs'
+                        self.ts.log('\tChange voltage from %0.1fV to %0.1fV and frequency from %0.1fHz to %0.1fHz in %0.2fs'
                               % (prev_v, entry.v, prev_f, entry.f, entry.t))
                         self.amplitude_frequency_ramp(amplitude_end_value=entry.v, end_frequency=entry.f,
                                                       ramp_time=entry.t, phases=entry.ph,
                                                       amplitude_start_value=prev_v, start_frequency=prev_f)
                     else:
                         # change in voltage
-                        print('\tChange voltage from %0.1fV to %0.1fV in %0.2fs' % (prev_v, entry.v, entry.t))
+                        self.ts.log('\tChange voltage from %0.1fV to %0.1fV in %0.2fs' % (prev_v, entry.v, entry.t))
                         self.amplitude_ramp(end_value=entry.v, ramp_time=entry.t, phases=entry.ph, start_value=prev_v)
 
                 elif not self._numeric_equal(prev_f, entry.f, self.eps):
                     # change in frequency
-                    print('\tChange frequency from %0.1fHz to %0.1fHz in %0.2fs' % (prev_f, entry.f, entry.t))
+                    self.ts.log('\tChange frequency from %0.1fHz to %0.1fHz in %0.2fs' % (prev_f, entry.f, entry.t))
                     self.frequency_ramp(end_frequency=entry.f, ramp_time=entry.t, start_frequency=prev_f)
 
                 else:
                     # wait, because no change in voltage or frequency
-                    print('\tWait %0.2fs' % entry.t)
+                    self.ts.log('\tWait %0.2fs' % entry.t)
                     self.ts.sleep(entry.t)
 
                 prev_v = entry.v
                 prev_f = entry.f
 
-            print('Finished profile')
+            self.ts.log('Finished profile')
         else:
             raise gridsim.GridSimError('You have to load a profile before starting it')
 
