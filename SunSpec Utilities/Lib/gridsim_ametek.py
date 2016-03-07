@@ -2,6 +2,7 @@
 import os
 import time
 import serial
+import socket
 import gridsim
 import grid_profiles
 
@@ -62,15 +63,24 @@ class GridSim(gridsim.GridSim):
         self.freq_param = ts.param_value('gridsim.ametek.freq')
         self.comm = ts.param_value('gridsim.ametek.comm')
         self.serial_port = ts.param_value('gridsim.ametek.serial_port')
-        self.ip_addr = ts.param_value('gridsim.ametek.ip_addr')
-        self.ip_port = ts.param_value('gridsim.ametek.ip_port')
+        self.ipaddr = ts.param_value('gridsim.ametek.ip_addr')
+        self.ipport = ts.param_value('gridsim.ametek.ip_port')
         self.baudrate = 115200
-        self.timeout = 2
+        self.timeout = 5
         self.write_timeout = 2
-
+        self.cmd_str = ''
+        self._cmd = None
+        self._query = None
         self.profile_name = ts.param_value('profile.profile_name')
 
-        self.open()  # open communications, not the relay
+        if self.comm == 'Serial':
+            self.open()  # open communications
+            self._cmd = self.cmd_serial
+            self._query = self.query_serial
+        elif self.comm == 'TCP/IP':
+            self._cmd = self.cmd_tcp
+            self._query = self.query_tcp
+
         self.profile_stop()
 
         if self.auto_config == 'Enabled':
@@ -84,10 +94,9 @@ class GridSim(gridsim.GridSim):
             else:
                 self.ts.log('Turning on grid simulator.')
                 self.relay(state=gridsim.RELAY_CLOSED)
-                # self.ts.log('Waiting 30 seconds for inverter to recognize the grid and start.')
-                # time.sleep(30)
 
-    def _cmd(self, cmd_str):
+    def cmd_serial(self, cmd_str):
+        self.cmd_str = cmd_str
         try:
             if self.conn is None:
                 raise gridsim.GridSimError('Communications port not open')
@@ -95,9 +104,49 @@ class GridSim(gridsim.GridSim):
             self.conn.flushInput()
             self.conn.write(cmd_str)
         except Exception, e:
-            raise
+             raise gridsim.GridSimError(str(e))
 
-    def _query(self, cmd_str):
+    def query_serial(self, cmd_str):
+        resp = ''
+        more_data = True
+
+        self.cmd_serial(cmd_str)
+
+        while more_data:
+            try:
+                count = self.conn.inWaiting()
+                if count < 1:
+                    count = 1
+                data = self.conn.read(count)
+                if len(data) > 0:
+                    for d in data:
+                        resp += d
+                        if d == '\n':
+                            more_data = False
+                            break
+                else:
+                    raise gridsim.GridSimError('Timeout waiting for response')
+            except gridsim.GridSimError:
+                raise
+            except Exception, e:
+                raise gridsim.GridSimError('Timeout waiting for response - More data problem')
+
+        return resp
+
+    def cmd_tcp(self, cmd_str):
+        try:
+            if self.conn is None:
+                self.ts.log('ipaddr = %s  ipport = %s' % (self.ipaddr, self.ipport))
+                self.conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.conn.settimeout(self.timeout)
+                self.conn.connect((self.ipaddr, self.ipport))
+
+            # print 'cmd> %s' % (cmd_str)
+            self.conn.send(cmd_str)
+        except Exception, e:
+            raise gridsim.GridSimError(str(e))
+
+    def query_tcp(self, cmd_str):
         resp = ''
         more_data = True
 
@@ -105,11 +154,11 @@ class GridSim(gridsim.GridSim):
 
         while more_data:
             try:
-                data = self.conn.read(self.buffer_size)
+                data = self.conn.recv(self.buffer_size)
                 if len(data) > 0:
                     for d in data:
                         resp += d
-                        if d == '\n':
+                        if d == '\n': #\r
                             more_data = False
                             break
             except Exception, e:
@@ -118,22 +167,20 @@ class GridSim(gridsim.GridSim):
         return resp
 
     def cmd(self, cmd_str):
+        self.cmd_str = cmd_str
         try:
             self._cmd(cmd_str)
-            '''
-            resp = self._query('SYSTem:ERRor?\n')
+            resp = self._query('SYSTem:ERRor?\n') #\r
 
             if len(resp) > 0:
-                resp_code, resp_str = resp.split(',')
-                if resp_code != '0':
-                    raise GridSimError(resp)
-            '''
+                if resp[0] != '0':
+                    raise gridsim.GridSimError(resp + ' ' + self.cmd_str)
         except Exception, e:
             raise gridsim.GridSimError(str(e))
 
     def query(self, cmd_str):
         try:
-            resp = self._query(cmd_str)
+            resp = self._query(cmd_str).strip()
         except Exception, e:
             raise gridsim.GridSimError(str(e))
 
@@ -176,7 +223,7 @@ class GridSim(gridsim.GridSim):
         if v1 != v_max or v2 != v_max or v3 != v_max:
             self.voltage_max(voltage=(v_max, v_max, v_max))
             v1, v2, v3 = self.voltage_max()
-        self.ts.log('Grid sim max voltage settings - v1 = %s, v2 = %s, v3 = %s' % (v1, v2, v3))
+        self.ts.log('Grid sim max voltage settings: v1 = %s, v2 = %s, v3 = %s' % (v1, v2, v3))
 
         # set nominal voltage
         v_nom = self.v_nom_param
@@ -184,7 +231,7 @@ class GridSim(gridsim.GridSim):
         if v1 != v_nom or v2 != v_nom or v3 != v_nom:
             self.voltage(voltage=(v_nom, v_nom, v_nom))
             v1, v2, v3 = self.voltage()
-        self.ts.log('Grid sim nominal voltage settings - v1 = %s, v2 = %s, v3 = %s' % (v1, v2, v3))
+        self.ts.log('Grid sim nominal voltage settings: v1 = %s, v2 = %s, v3 = %s' % (v1, v2, v3))
 
         # set max current if it's not already at gridsim_Imax
         i_max = self.i_max_param
@@ -333,7 +380,6 @@ class GridSim(gridsim.GridSim):
         cmd_list.append(':init\n')
 
         self.profile = cmd_list
-
 
     def profile_start(self):
         """
