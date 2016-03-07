@@ -15,8 +15,6 @@ def params(info, group_name):
     pname = lambda name: group_name + '.' + GROUP_NAME + '.' + name
     mode = manual_info['mode']
     info.param_add_value(gname('mode'), mode)
-    info.param_group(gname(GROUP_NAME), label='%s Parameters' % mode,
-                     active=gname('mode'),  active_value=mode, glob=True)
 
 GROUP_NAME = 'manual'
 
@@ -25,3 +23,8 @@ class DAS(das.DAS):
     def __init__(self, ts, group_name):
         das.DAS.__init__(self, ts, group_name)
 
+    def data_init(self):
+        return None
+
+    def trigger_init(self):
+        return None
