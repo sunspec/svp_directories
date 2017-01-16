@@ -1,0 +1,12 @@
+<suite globals="True" name="All_Optional">
+  <members>
+    <member name="SA14_FW.ste" />
+    <member name="SA15_VW.ste" />
+  </members>
+  <params>
+    <param name="gridsim.auto_config" type="string">Disabled</param>
+    <param name="gridsim.mode" type="string">Manual</param>
+    <param name="pvsim.mode" type="string">Manual</param>
+    <param name="das.mode" type="string">Manual</param>
+  </params>
+</suite>

@@ -1,0 +1,15 @@
+<suite globals="True" name="SA12_SPF">
+  <members>
+    <member name="SA12_SPF/PF_mid_cap.tst" />
+    <member name="SA12_SPF/PF_mid_ind.tst" />
+    <member name="SA12_SPF/PF_min_cap.tst" />
+    <member name="SA12_SPF/PF_min_ind.tst" />
+  </members>
+  <params>
+    <param name="gridsim.auto_config" type="string">Disabled</param>
+    <param name="der.mode" type="string">Manual</param>
+    <param name="gridsim.mode" type="string">Manual</param>
+    <param name="pvsim.mode" type="string">Manual</param>
+    <param name="das.mode" type="string">Manual</param>
+  </params>
+</suite>

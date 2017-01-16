@@ -1,0 +1,39 @@
+<suite globals="True" name="All_Required">
+  <members>
+    <member name="SA9_LHVRT_Ride-through.ste" />
+    <member name="SA9_LHVRT_Trip.ste" />
+    <member name="SA10_LHFRT_Ride-through.ste" />
+    <member name="SA10_LHFRT_Trip.ste" />
+    <member name="SA11_RR.ste" />
+    <member name="SA11_SS.ste" />
+    <member name="SA12_SPF.ste" />
+    <member name="SA13_VV.ste" />
+  </members>
+  <params>
+    <param name="der.sunspec.slave_id" type="int">1</param>
+    <param name="gridsim.ametek.phases" type="int">1</param>
+    <param name="pvsim.terrasas.channel" type="int">10</param>
+    <param name="gridsim.ametek.freq" type="float">60.0</param>
+    <param name="gridsim.ametek.i_max" type="float">100.0</param>
+    <param name="gridsim.ametek.v_nom" type="float">277.2</param>
+    <param name="gridsim.ametek.v_max" type="float">300.0</param>
+    <param name="pvsim.terrasas.vmp" type="float">460.0</param>
+    <param name="pvsim.terrasas.pmp" type="float">3000.0</param>
+    <param name="der.sunspec.baudrate" type="int">9600</param>
+    <param name="das.px8000.sample_interval" type="string">100</param>
+    <param name="das.px8000.ip_addr" type="string">192.168.0.10</param>
+    <param name="pvsim.terrasas.ipaddr" type="string">192.168.0.167</param>
+    <param name="das.px8000.wiring_system" type="string">1P2W</param>
+    <param name="gridsim.mode" type="string">Ametek</param>
+    <param name="der.sunspec.ifc_name" type="string">COM3</param>
+    <param name="gridsim.auto_config" type="string">Disabled</param>
+    <param name="der.sunspec.parity" type="string">N</param>
+    <param name="das.px8000.comm" type="string">Network</param>
+    <param name="der.sunspec.ifc_type" type="string">RTU</param>
+    <param name="gridsim.ametek.comm" type="string">Serial</param>
+    <param name="der.mode" type="string">SunSpec</param>
+    <param name="pvsim.mode" type="string">TerraSAS</param>
+    <param name="das.mode" type="string">Yokogawa PX8000</param>
+    <param name="gridsim.ametek.serial_port" type="string">com1</param>
+  </params>
+</suite>

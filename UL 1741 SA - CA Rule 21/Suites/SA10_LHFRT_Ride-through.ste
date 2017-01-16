@@ -1,0 +1,12 @@
+<suite globals="True" name="SA10_LHFRT_Ride-through">
+  <members>
+    <member name="SA10_LHFRT/HFRT_HF1.tst" />
+    <member name="SA10_LHFRT/LFRT_LF1.tst" />
+  </members>
+  <params>
+    <param name="gridsim.auto_config" type="string">Disabled</param>
+    <param name="gridsim.mode" type="string">Manual</param>
+    <param name="pvsim.mode" type="string">Manual</param>
+    <param name="das.mode" type="string">Manual</param>
+  </params>
+</suite>
